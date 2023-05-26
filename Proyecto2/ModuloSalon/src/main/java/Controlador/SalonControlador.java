@@ -10,7 +10,7 @@ public class SalonControlador {
         salon = new Salon();
     }
 
-    public void mostrarEstadoMesas() {
+   /* public void mostrarEstadoMesas() {
         for (Mesa mesa : salon.getMesas()) {
             int numeroMesa = mesa.getNumeroMesa();
             boolean estado = mesa.getEstado();
@@ -54,5 +54,5 @@ public class SalonControlador {
             }
         }
         return null;
-    }
+    }*/
 }

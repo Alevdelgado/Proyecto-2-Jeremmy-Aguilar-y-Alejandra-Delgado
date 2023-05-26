@@ -3,40 +3,22 @@ package Modelo;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Mesa {
-    private int nroMesa;
-    private boolean estado;
-    private List<String> ordenes;
-    private String cuenta;
+    // Agrega los atributos necesarios para almacenar la información de la mesa
+    private int numeroMesa;
 
-    public Mesa(int nroMesa) {
-        this.nroMesa = nroMesa;
-        estado = false;
-        ordenes = new ArrayList<>();
-        cuenta = "";
+    public Mesa(int numeroMesa) {
+        this.numeroMesa = numeroMesa;
     }
 
-    public boolean getEstado() {
-        return estado;
-    }
-
-    public void liberarMesa() {
-        estado = false;
-        ordenes.clear();
-        cuenta = "";
-    }
-
-    public void ocuparMesa() {
-        estado = true;
-    }
-
-    public void generarFactura() {
-        // se genera la factura cuando se da a aceptar la orden y de acuerdo a la clases factory de hamburgues que en ellas 
-        // estan lo precios
-    }
-
+    // Agrega los getters y setters para acceder a los atributos de la clase
     public int getNumeroMesa() {
-        return nroMesa;
+        return numeroMesa;
     }
-   
+
+    public void setNumeroMesa(int numeroMesa) {
+        this.numeroMesa = numeroMesa;
+    }
+
 }
