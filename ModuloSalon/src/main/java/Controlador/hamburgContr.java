@@ -9,10 +9,12 @@ public class hamburgContr extends hamburgModelo implements ingredientesC{
         precio = 500;
     }
 
+    @Override
     public String descripcion(){
         return desc;
     }
 
+    @Override
     public int precio(){
         return precio;
     }
