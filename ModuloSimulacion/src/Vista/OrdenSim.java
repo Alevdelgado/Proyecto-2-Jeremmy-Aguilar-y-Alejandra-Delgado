@@ -21,7 +21,7 @@ public class OrdenSim extends javax.swing.JFrame {
         int columnas =5; // Número de columnas en la matriz
        // setResizable(false);
         
-
+false
         panelMesas.setLayout(new GridLayout(filas, columnas));
 
         botones = new JButton[filas][columnas]; // Inicialización de la matriz de botones
