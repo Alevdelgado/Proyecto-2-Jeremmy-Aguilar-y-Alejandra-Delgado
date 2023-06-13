@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controlador;
 
 import java.io.DataInputStream;
@@ -10,13 +6,14 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import vista.ventCocina;
-/*
- *
- * @author Llermy
- */
+import static vista.ventCocina.columnas;
+
 
 public class threadSocket extends Thread {
     ventCocina tempVentanaCocina;
+    public static int numMesa;
+    public static int tempX;
+    public static int tempY;
     public threadSocket(ventCocina tempVent) {
         tempVentanaCocina = tempVent;
     }
@@ -30,11 +27,11 @@ public class threadSocket extends Thread {
             while (true){
                 Socket sockCordX = serverCordX.accept();
                 DataInputStream infoEntrada = new DataInputStream(sockCordX.getInputStream());
-                int tempX = infoEntrada.read();
+                tempX = infoEntrada.read();
                                 
                 Socket sockCordY = serverCordY.accept();
                 infoEntrada = new DataInputStream(sockCordY.getInputStream());
-                int tempY = infoEntrada.read();
+                tempY = infoEntrada.read();
                         
                 
                 Socket miSocket = serverCocina.accept();
@@ -45,7 +42,7 @@ public class threadSocket extends Thread {
                 System.out.println("Cord X "+tempX);
                 System.out.println("Cord X "+tempY);
                 System.out.println(mensajeTexto);
-                
+                numMesa = tempX * columnas + tempY + 1;
                 tempVentanaCocina.cambiarBoton(mensajeTexto, tempX,tempY);
             }
         } catch (IOException e) {

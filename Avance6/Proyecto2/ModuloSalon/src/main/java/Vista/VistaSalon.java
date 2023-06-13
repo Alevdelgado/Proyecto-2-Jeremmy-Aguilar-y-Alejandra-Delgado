@@ -9,6 +9,9 @@ import java.io.IOException;
 
 import Controlador.Salon.ordenC;
 import Controlador.Hamburguesa.hamburEspecialC;
+import static Controlador.servidorSalon.listaHamburguesas;
+import static Controlador.servidorSalon.numMesa;
+import static Controlador.servidorSalon.precioTotal;
 
 /**
  *
@@ -17,20 +20,23 @@ import Controlador.Hamburguesa.hamburEspecialC;
 public class VistaSalon {
     public static void main(String[] args) throws IOException {  
         
-        ordenC orden01 = new ordenC(0,2); 
+        /*ordenC orden01 = new ordenC(0,2); 
         orden01.insetHambur(new hamburEspecialC(null,null,null,null,null,null));
         orden01.insetHambur(new hamburEspecialC(null,null,null,null,null,null));
         orden01.insetHambur(new hamburEspecialC(null,null,null,null,null,null));
         
-        System.out.println(orden01.pasarOrdenToString());
+        System.out.println(orden01.pasarOrdenToString());*/
         
-        VistaPedido vistaPedido = new VistaPedido ();
-        vistaPedido.setVisible(true);
+       // VistaPedido vistaPedido = new VistaPedido ();
+        //vistaPedido.setVisible(true);
 
+        
+        
+        
         servidorSalon serverSalon01 = new servidorSalon();
         serverSalon01.start(); 
         
-        serverSalon01.enviarConfir(orden01.numMesaX, orden01.numMesaY ,orden01.pasarOrdenToString());
-        serverSalon01.enviarConfir(orden01.numMesaX, orden01.numMesaY ,orden01.pasarOrdenToString());
+      //  serverSalon01.enviarConfir(orden01.numMesaX, orden01.numMesaY ,orden01.pasarOrdenToString());
+        //serverSalon01.enviarConfir(orden01.numMesaX, orden01.numMesaY ,orden01.pasarOrdenToString());
     }
 }
