@@ -2,6 +2,8 @@
 package vista;
 
 import controlador.threadSocket;
+import static controlador.threadSocket.tempX;
+import static controlador.threadSocket.tempY;
 import javax.swing.JFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,7 +39,7 @@ public class ventanaCompPedido extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         textoPedido = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        completar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Completar pedido");
@@ -46,10 +48,10 @@ public class ventanaCompPedido extends javax.swing.JFrame {
         textoPedido.setRows(5);
         jScrollPane1.setViewportView(textoPedido);
 
-        jButton1.setText("Completar pedido");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        completar.setText("Completar pedido");
+        completar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                completarActionPerformed(evt);
             }
         });
 
@@ -62,7 +64,7 @@ public class ventanaCompPedido extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(completar)
                 .addGap(144, 144, 144))
         );
         layout.setVerticalGroup(
@@ -70,24 +72,30 @@ public class ventanaCompPedido extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
-                .addComponent(jButton1)
+                .addComponent(completar)
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            tempSocketConfPedido.enviarConfir(cordX, cordY);
-            tempVentCoci.cambiarBoton("", cordX, cordY);
+    private void completarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_completarActionPerformed
+//        try {
+//           // tempSocketConfPedido.enviarConfir(cordX, cordY);
+//            tempVentCoci.cambiarBoton("", cordX, cordY);
+//            
+//            this.dispose();
+//            
+//        } catch (IOException ex) {
+//            Logger.getLogger(ventanaCompPedido.class.getName()).log(Level.SEVERE, null, ex);
+//        }
             
+            ventCocina cocina = new ventCocina();
+            cocina.setVisible(true);
+            cocina.cambiarBoton("", tempX, tempY);
             this.dispose();
             
-        } catch (IOException ex) {
-            Logger.getLogger(ventanaCompPedido.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_completarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -122,7 +130,7 @@ public class ventanaCompPedido extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton completar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea textoPedido;
     // End of variables declaration//GEN-END:variables

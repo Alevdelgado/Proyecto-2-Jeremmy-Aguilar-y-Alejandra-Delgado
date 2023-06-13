@@ -14,14 +14,14 @@ public class ModuloCocina {
         
         
         ventCocina ventCoci01 = new ventCocina();
-        ventCoci01.setVisible(true);
+       // ventCoci01.setVisible(true);
 
-        threadSocket socketCocina01 = new threadSocket(ventCoci01);
-        socketCocina01.start();
+       threadSocket socketCocina01 = new threadSocket(ventCoci01);
+       socketCocina01.start();
         
         ventCoci01.setSocket(socketCocina01);
 
-        socketCocina01.enviarConfir(7,5);
+      //  socketCocina01.enviarConfir(7,5);
         
         System.out.println("dadadadaa");
     }

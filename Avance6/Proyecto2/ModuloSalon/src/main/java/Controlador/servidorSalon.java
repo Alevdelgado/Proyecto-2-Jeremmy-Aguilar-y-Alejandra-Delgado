@@ -26,42 +26,6 @@ public class servidorSalon extends Thread{
         
     }
  
-//public void run() {
-//    System.out.println("Servidor del salón en espera...");
-//
-//    try {
-//        // Crear y configurar el ServerSocket para recibir la lista de hamburguesas
-//        ServerSocket serverHamburguesas = new ServerSocket(9999);
-//        try (Socket envioHamburguesa = serverHamburguesas.accept()) {
-//            ObjectInputStream objInputStream = new ObjectInputStream(envioHamburguesa.getInputStream());
-//            List<String> listaHamburguesas = (List<String>) objInputStream.readObject();
-//            
-//            System.out.println("Llegó una orden de hamburguesas desde el módulo de simulación:");
-//            System.out.println("Hamburguesas: " + listaHamburguesas);
-//        }
-
-        // Crear y configurar los ServerSocket para recibir las coordenadas
-        /*ServerSocket serverConfPosX = new ServerSocket(7201);
-        ServerSocket serverConfPosY = new ServerSocket(6201);
-
-        while (true) {
-            Socket miSocket01 = serverConfPosX.accept();
-            DataInputStream cordEntradaX = new DataInputStream(miSocket01.getInputStream());
-            int tempX = cordEntradaX.read();
-
-            Socket miSocket02 = serverConfPosY.accept();
-            DataInputStream cordEntradaY = new DataInputStream(miSocket02.getInputStream());
-            int tempY = cordEntradaY.read();
-
-            System.out.println("Llegó un mensaje...");
-            System.out.println("Coordenada X: " + tempX);
-            System.out.println("Coordenada Y: " + tempY);
-        }*/
-//    } catch (IOException | ClassNotFoundException e) {
-//        e.printStackTrace();
-//    }
-//}
-
     
     
     @Override
@@ -82,57 +46,48 @@ public class servidorSalon extends Thread{
             // Porblemas al guardar un entero
             numMesa = objInputStream.readInt();
             precioTotal = objInputStream.readInt();
-            //i/nt precioTotal = objInputStream.readInt();
             System.out.println("Llegó una orden de hamburguesas desde el módulo de simulación:");
             System.out.println("Hamburguesas: " + listaHamburguesas);
             System.out.println("Hamburguesas especiales con: " + listaIngredientes);
             new VistaPedido(numMesa,listaHamburguesas, precioTotal).setVisible(true);
-            
-
-            //System.out.println("Mesa" + numMesa);
-            //System.out.println("Precio total: " + precioTotal);
-            //new VistaPedido(listaHamburguesas).setVisible(true);
-            
-            //vistaPedido.agregarDatos();
-
-
-
         }
     } catch (IOException | ClassNotFoundException e) {
         e.printStackTrace();
     }
+ }
+    
+    public void enviarOrdenCocina(List<String> listaHamburguesas, List<List> listaIngredientes, int numMesa, int precioTotal) {
+    try (Socket socketHamburguesas = new Socket("localhost", 8888);
+         ObjectOutputStream objOutputStream = new ObjectOutputStream(socketHamburguesas.getOutputStream())) {
+
+        // Enviar la lista de hamburguesas
+        objOutputStream.writeObject(listaHamburguesas);
+        objOutputStream.flush();
+        
+        // Enviar la lista de ingredientes
+        objOutputStream.writeObject(listaIngredientes);
+        objOutputStream.flush();
+        
+        objOutputStream.writeInt(numMesa);
+        objOutputStream.flush();
+        
+        objOutputStream.writeInt(precioTotal);
+        objOutputStream.flush();
+        
+        System.out.println("Lista de hamburguesas enviada al servidor de la cocina");
+        System.out.println("Hamburguesas: " + listaHamburguesas);
+        System.out.println("Ingredientes: " + listaIngredientes);
+        System.out.println("Mesa: " + numMesa);
+        System.out.println("Precio Total: " + precioTotal);
+
+    } catch (IOException e) {
+        e.printStackTrace();
+    }  
+     
 }
 
     
     
 
 
-    
- /*   public void enviarConfir(int tempX, int tempY, String mensajePedido) throws IOException {
-        try (Socket sock01 = new Socket("172.18.3.184", 7101);
-            DataOutputStream cordXSalida = new DataOutputStream(sock01.getOutputStream())){
-            cordXSalida.write(tempX);
-        } catch (Exception e) {
-            System.out.println("!! no se pudo conectar con el socket de la informacion del pedido.");
-        }
-        
-        try (Socket sock02 = new Socket("172.18.3.184", 6101);
-            DataOutputStream cordYSalida = new DataOutputStream(sock02.getOutputStream())){
-            cordYSalida.write(tempY);
-        } catch (Exception e) {
-            System.out.println("!! no se pudo conectar con el socket de la informacion del pedido.");
-        }
-        
-        try (Socket sock03 = new Socket("172.18.3.184", 8101);
-            DataOutputStream mensajeSalida = new DataOutputStream(sock03.getOutputStream())){
-            mensajeSalida.writeUTF(mensajePedido);
-        } catch (Exception e) {
-            System.out.println("!! no se pudo conectar con el socket de la informacion del pedido.");
-        }
-    }*/
-    
-    /*   public static void main(String[] args) {
-        servidorSalon salon = new servidorSalon();
-        salon.start();
-    } */
 }

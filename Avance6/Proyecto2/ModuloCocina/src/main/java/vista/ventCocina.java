@@ -33,7 +33,7 @@ public class ventCocina extends javax.swing.JFrame implements ActionListener {
         initComponents();
         
         crearBotPedidos();
-        cambiarBoton(mensajeComPedido, tempX,tempY);
+       // cambiarBoton(mensajeComPedido, tempX,tempY);
 
     }
     
@@ -189,9 +189,10 @@ public class ventCocina extends javax.swing.JFrame implements ActionListener {
                     if (matrizStrPedidos[i][j] != ""){
                         numMesa = i * columnas + j + 1;
                         mensajeComPedido = "Pedido de la mesa " + numMesa; // listo lo calcula bien
-                        cambiarBoton(mensajeComPedido, i,j);
+                       // cambiarBoton(mensajeComPedido, i,j);
                         ventanaCompPedido tempVentana = new ventanaCompPedido(matrizStrPedidos[i][j],this, tempSocket, i, j);
                         tempVentana.setVisible(true);
+                        this.dispose();
                     }
                     
                     break; // Termina el bucle una vez que se encuentra el botón presionado

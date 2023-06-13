@@ -3,7 +3,9 @@ package Vista;
 //import static Controlador.servidorSalon.listaHamburguesas;
 //import static Controlador.servidorSalon.numMesa;
 //import static Controlador.servidorSalon.precioTotal;
+import Controlador.servidorSalon;
 import static Controlador.servidorSalon.listaHamburguesas;
+import static Controlador.servidorSalon.listaIngredientes;
 import static Controlador.servidorSalon.numMesa;
 import static Controlador.servidorSalon.precioTotal;
 import java.util.List;
@@ -13,7 +15,10 @@ public class VistaPedido extends javax.swing.JFrame {
     DefaultTableModel dtm = new DefaultTableModel();
     private int numMesa;
     private List<String> listaHamburguesas;
+    private List<List> listaIngredientes;
     private int precioTotal;
+    public static servidorSalon tempSocketSalon;
+    
     
     
     
@@ -22,6 +27,7 @@ public class VistaPedido extends javax.swing.JFrame {
         this.listaHamburguesas = listaHamburguesas;
         this.precioTotal = precioTotal;
         initComponents();
+        tempSocketSalon = new servidorSalon();
         String[] titulo = new String[] {"Mesa","Orden","Total"};
         dtm.setColumnIdentifiers(titulo);
 //        dtm.addRow(new Object[]{numMesa, listaHamburguesas, precioTotal});
@@ -44,7 +50,7 @@ public class VistaPedido extends javax.swing.JFrame {
         Factura = new javax.swing.JTable();
         Actualizar = new javax.swing.JButton();
         cancelar = new javax.swing.JButton();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        Aceptar = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,8 +72,18 @@ public class VistaPedido extends javax.swing.JFrame {
         });
 
         cancelar.setText("Cancelar pedido");
+        cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarActionPerformed(evt);
+            }
+        });
 
-        jToggleButton1.setText("Aceptar");
+        Aceptar.setText("Aceptar");
+        Aceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AceptarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,7 +96,7 @@ public class VistaPedido extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(Actualizar)
                 .addGap(18, 18, 18)
-                .addComponent(jToggleButton1)
+                .addComponent(Aceptar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -92,7 +108,7 @@ public class VistaPedido extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Actualizar)
                     .addComponent(cancelar)
-                    .addComponent(jToggleButton1))
+                    .addComponent(Aceptar))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -103,11 +119,25 @@ public class VistaPedido extends javax.swing.JFrame {
         // TODO add your handling code here:
         agregarDatos();
     }//GEN-LAST:event_ActualizarActionPerformed
+
+    private void AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarActionPerformed
+        
+        // Aqui que le envie el numMesa a la cocina
+        tempSocketSalon.enviarOrdenCocina(listaHamburguesas,listaIngredientes,numMesa, precioTotal);
+        this.dispose();
+
+    }//GEN-LAST:event_AceptarActionPerformed
+
+    private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_cancelarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton Aceptar;
     private javax.swing.JButton Actualizar;
     private javax.swing.JTable Factura;
     private javax.swing.JButton cancelar;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }
